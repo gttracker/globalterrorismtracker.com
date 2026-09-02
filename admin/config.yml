@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: gttracker/globalterrorismtracker.com
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "reports"
+    label: "Reports"
+    folder: "content/reports"
+    create: true
+    slug: "{{year}}-{{month}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Year", name: "year", widget: "number" }
+      - { label: "Month", name: "month", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Report File", name: "file", widget: "file" }
+
+  - name: "analysis"
+    label: "Analysis"
+    folder: "content/analysis"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Content", name: "body", widget: "markdown" }
