@@ -4,10 +4,222 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
+
   <title>GTT Admin</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #f5f3ee;
+      color: #111;
+      font-family: Arial, sans-serif;
+    }
+
+    .topbar {
+      background: #111;
+      color: white;
+      padding: 18px 30px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .control-box {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .control-box h2 {
+      margin-top: 0;
+    }
+
+    #status {
+      font-weight: bold;
+      margin: 15px 0 20px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 20px;
+      margin-right: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lock {
+      background: #111;
+      color: white;
+    }
+
+    .unlock {
+      background: #b00000;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    #cms {
+      background: white;
+      min-height: 500px;
+    }
+  </style>
 </head>
 
 <body>
+
+  <div class="topbar">
+    GTT Admin
+  </div>
+
+  <div class="container">
+
+    <!-- SITE CONTROL -->
+    <div class="control-box">
+
+      <h2>Website Control</h2>
+
+      <div id="status">
+        Checking website status...
+      </div>
+
+      <button class="lock" onclick="lockSite()">
+        🔒 Lock Site
+      </button>
+
+      <button class="unlock" onclick="unlockSite()">
+        🔓 Unlock Site
+      </button>
+
+      <div id="message"></div>
+
+    </div>
+
+    <!-- DECAP CMS -->
+    <div id="cms"></div>
+
+  </div>
+
+  <script>
+
+    const CONTROL_URL =
+      "https://gtt-site-control.gtt-globalterrorismtracker.workers.dev";
+
+    async function checkStatus() {
+
+      try {
+
+        const response =
+          await fetch(CONTROL_URL + "/status");
+
+        const data =
+          await response.json();
+
+        const status =
+          document.getElementById("status");
+
+        if (data.status === "unlocked") {
+
+          status.innerHTML =
+            "🟢 Website Status: UNLOCKED";
+
+        } else {
+
+          status.innerHTML =
+            "🔴 Website Status: LOCKED";
+
+        }
+
+      } catch (error) {
+
+        document.getElementById("status").innerHTML =
+          "⚠️ Unable to check website status.";
+
+      }
+
+    }
+
+
+    async function lockSite() {
+
+      try {
+
+        const response =
+          await fetch(CONTROL_URL + "/lock");
+
+        const data =
+          await response.json();
+
+        if (data.success) {
+
+          document.getElementById("message").innerHTML =
+            "Website has been locked.";
+
+          checkStatus();
+
+        }
+
+      } catch (error) {
+
+        document.getElementById("message").innerHTML =
+          "Unable to lock website.";
+
+      }
+
+    }
+
+
+    async function unlockSite() {
+
+      try {
+
+        const response =
+          await fetch(CONTROL_URL + "/unlock");
+
+        const data =
+          await response.json();
+
+        if (data.success) {
+
+          document.getElementById("message").innerHTML =
+            "Website has been unlocked.";
+
+          checkStatus();
+
+        }
+
+      } catch (error) {
+
+        document.getElementById("message").innerHTML =
+          "Unable to unlock website.";
+
+      }
+
+    }
+
+
+    checkStatus();
+
+  </script>
+
+
+  <!-- Decap CMS -->
+
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
 </body>
 </html>
