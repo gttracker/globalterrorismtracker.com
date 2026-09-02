@@ -15,109 +15,85 @@
       font-family: Arial, sans-serif;
     }
 
-    .topbar {
+    .gtt-control {
+      padding: 25px 30px;
       background: #111;
       color: white;
-      padding: 18px 30px;
-      font-size: 22px;
+    }
+
+    .gtt-control h2 {
+      margin: 0 0 15px;
+    }
+
+    #site-status {
+      margin-bottom: 15px;
       font-weight: bold;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .control-box {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 25px;
-      margin-bottom: 30px;
-    }
-
-    .control-box h2 {
-      margin-top: 0;
-    }
-
-    #status {
-      font-weight: bold;
-      margin: 15px 0 20px;
-    }
-
-    button {
+    .gtt-control button {
+      padding: 10px 18px;
+      margin-right: 8px;
       border: none;
-      padding: 12px 20px;
-      margin-right: 10px;
-      font-size: 15px;
-      font-weight: bold;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    .lock {
-      background: #111;
-      color: white;
+    .lock-btn {
+      background: white;
+      color: #111;
     }
 
-    .unlock {
+    .unlock-btn {
       background: #b00000;
       color: white;
     }
 
-    button:hover {
-      opacity: 0.85;
-    }
-
-    #message {
-      margin-top: 15px;
+    #site-message {
+      margin-top: 12px;
       font-size: 14px;
     }
 
-    #cms {
-      background: white;
-      min-height: 500px;
+    #nc-root {
+      min-height: 700px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    GTT Admin
-  </div>
+  <!-- GTT SITE CONTROL -->
 
-  <div class="container">
+  <div class="gtt-control">
 
-    <!-- SITE CONTROL -->
-    <div class="control-box">
+    <h2>GTT Website Control</h2>
 
-      <h2>Website Control</h2>
-
-      <div id="status">
-        Checking website status...
-      </div>
-
-      <button class="lock" onclick="lockSite()">
-        🔒 Lock Site
-      </button>
-
-      <button class="unlock" onclick="unlockSite()">
-        🔓 Unlock Site
-      </button>
-
-      <div id="message"></div>
-
+    <div id="site-status">
+      Checking website status...
     </div>
 
-    <!-- DECAP CMS -->
-    <div id="cms"></div>
+    <button class="lock-btn" onclick="lockSite()">
+      🔒 Lock Site
+    </button>
+
+    <button class="unlock-btn" onclick="unlockSite()">
+      🔓 Unlock Site
+    </button>
+
+    <div id="site-message"></div>
 
   </div>
+
+
+  <!-- DECAP CMS -->
+
+  <div id="nc-root"></div>
+
 
   <script>
 
     const CONTROL_URL =
       "https://gtt-site-control.gtt-globalterrorismtracker.workers.dev";
+
 
     async function checkStatus() {
 
@@ -129,24 +105,21 @@
         const data =
           await response.json();
 
-        const status =
-          document.getElementById("status");
-
         if (data.status === "unlocked") {
 
-          status.innerHTML =
+          document.getElementById("site-status").innerHTML =
             "🟢 Website Status: UNLOCKED";
 
         } else {
 
-          status.innerHTML =
+          document.getElementById("site-status").innerHTML =
             "🔴 Website Status: LOCKED";
 
         }
 
       } catch (error) {
 
-        document.getElementById("status").innerHTML =
+        document.getElementById("site-status").innerHTML =
           "⚠️ Unable to check website status.";
 
       }
@@ -166,8 +139,8 @@
 
         if (data.success) {
 
-          document.getElementById("message").innerHTML =
-            "Website has been locked.";
+          document.getElementById("site-message").innerHTML =
+            "Website locked successfully.";
 
           checkStatus();
 
@@ -175,7 +148,7 @@
 
       } catch (error) {
 
-        document.getElementById("message").innerHTML =
+        document.getElementById("site-message").innerHTML =
           "Unable to lock website.";
 
       }
@@ -195,8 +168,8 @@
 
         if (data.success) {
 
-          document.getElementById("message").innerHTML =
-            "Website has been unlocked.";
+          document.getElementById("site-message").innerHTML =
+            "Website unlocked successfully.";
 
           checkStatus();
 
@@ -204,7 +177,7 @@
 
       } catch (error) {
 
-        document.getElementById("message").innerHTML =
+        document.getElementById("site-message").innerHTML =
           "Unable to unlock website.";
 
       }
@@ -216,8 +189,6 @@
 
   </script>
 
-
-  <!-- Decap CMS -->
 
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
