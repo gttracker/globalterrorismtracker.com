@@ -86,7 +86,7 @@
         .analysis {
             max-width: 1100px;
             margin: auto;
-            padding: 70px 25px 90px;
+            padding: 70px 25px 100px;
         }
 
         .section-title {
@@ -96,66 +96,23 @@
             margin-bottom: 30px;
         }
 
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .analysis-card {
+        .empty-state {
             background: white;
             border: 1px solid #ddd;
-            padding: 30px;
+            padding: 70px 30px;
+            text-align: center;
         }
 
-        .analysis-image {
-            height: 230px;
-            background: #e9e6df;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .analysis-image span {
-            color: #777;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .analysis-date {
-            color: #c1121f;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .empty-state h3 {
+            font-size: 24px;
             margin-bottom: 12px;
         }
 
-        .analysis-card h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
-
-        .analysis-card p {
+        .empty-state p {
             color: #666;
-            line-height: 1.6;
-            margin-bottom: 22px;
-        }
-
-        .button {
-            display: inline-block;
-            background: #111;
-            color: white;
-            text-decoration: none;
-            padding: 11px 19px;
-            font-size: 14px;
-        }
-
-        .button:hover {
-            background: #c1121f;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: auto;
         }
 
         /* FOOTER */
@@ -198,10 +155,6 @@
             .page-intro h1 {
                 font-size: 40px;
             }
-
-            .analysis-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -241,38 +194,14 @@
 
     <h2 class="section-title">Latest Analysis</h2>
 
-    <div class="analysis-grid">
+    <div class="empty-state">
 
+        <h3>No Analysis Published Yet</h3>
 
-        <!-- ANALYSIS 1 -->
-
-        <article class="analysis-card">
-
-            <div class="analysis-image">
-                <span>Article Image</span>
-            </div>
-
-            <div class="analysis-date">
-                Analysis
-            </div>
-
-            <h3>
-                Major Terrorism & Security Analysis
-            </h3>
-
-            <p>
-                In-depth analysis of major terrorism and security developments,
-                focusing on key events, emerging trends, and their wider implications.
-            </p>
-
-            <a href="#" class="button">
-                Read Analysis
-            </a>
-
-        </article>
-
-
-        <!-- FUTURE ANALYSIS ARTICLES CAN BE ADDED HERE -->
+        <p>
+            GTT analysis will be published here, covering major terrorism
+            and security developments, emerging trends, threats, and operations.
+        </p>
 
     </div>
 
