@@ -20,6 +20,47 @@
             color: #111;
         }
 
+        /* LOCK SCREEN */
+        #gtt-lock-screen {
+            display: none;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #f7f5f0;
+            padding: 30px;
+        }
+
+        #gtt-lock-screen .lock-box {
+            max-width: 600px;
+        }
+
+        #gtt-lock-screen h1 {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        #gtt-lock-screen h1 span {
+            color: #c1121f;
+        }
+
+        #gtt-lock-screen h2 {
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        #gtt-lock-screen p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* MAIN WEBSITE */
+        #gtt-main-site {
+            display: none;
+        }
+
         /* HEADER */
         header {
             background: #111;
@@ -202,11 +243,42 @@
             .brand img {
                 height: 50px;
             }
+
+            #gtt-lock-screen h1 {
+                font-size: 45px;
+            }
+
+            #gtt-lock-screen h2 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+<!-- LOCK SCREEN -->
+
+<div id="gtt-lock-screen">
+
+    <div class="lock-box">
+
+        <h1><span>GTT</span></h1>
+
+        <h2>Global Terrorism Tracker</h2>
+
+        <p>
+            The website is temporarily unavailable.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN WEBSITE -->
+
+<div id="gtt-main-site">
 
 <header>
 
@@ -310,6 +382,66 @@
     </p>
 
 </footer>
+
+</div>
+
+
+<!-- GTT LOCK / UNLOCK CHECK -->
+
+<script>
+
+    const GTT_CONTROL_URL =
+        "https://gtt-site-control.gtt-globalterrorismtracker.workers.dev";
+
+    async function checkGTTStatus() {
+
+        try {
+
+            const response =
+                await fetch(
+                    GTT_CONTROL_URL + "/status",
+                    { cache: "no-store" }
+                );
+
+            const data =
+                await response.json();
+
+            const lockScreen =
+                document.getElementById("gtt-lock-screen");
+
+            const mainSite =
+                document.getElementById("gtt-main-site");
+
+
+            if (data.status === "locked") {
+
+                lockScreen.style.display = "flex";
+                mainSite.style.display = "none";
+
+            } else {
+
+                lockScreen.style.display = "none";
+                mainSite.style.display = "block";
+
+            }
+
+        } catch (error) {
+
+            /*
+             If the control server is unavailable,
+             keep the normal website accessible.
+            */
+
+            document.getElementById("gtt-lock-screen").style.display = "none";
+            document.getElementById("gtt-main-site").style.display = "block";
+
+        }
+
+    }
+
+    checkGTTStatus();
+
+</script>
 
 </body>
 </html>
