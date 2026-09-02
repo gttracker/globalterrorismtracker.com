@@ -86,7 +86,7 @@
         .reports {
             max-width: 1100px;
             margin: auto;
-            padding: 70px 25px 90px;
+            padding: 70px 25px 100px;
         }
 
         .section-title {
@@ -96,66 +96,23 @@
             margin-bottom: 30px;
         }
 
-        .report-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .report-card {
+        .empty-state {
             background: white;
             border: 1px solid #ddd;
-            padding: 30px;
+            padding: 70px 30px;
+            text-align: center;
         }
 
-        .report-cover {
-            height: 230px;
-            background: #e9e6df;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .report-cover span {
-            color: #777;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .report-date {
-            color: #c1121f;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .empty-state h3 {
+            font-size: 24px;
             margin-bottom: 12px;
         }
 
-        .report-card h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
-        }
-
-        .report-card p {
+        .empty-state p {
             color: #666;
-            line-height: 1.6;
-            margin-bottom: 22px;
-        }
-
-        .button {
-            display: inline-block;
-            background: #111;
-            color: white;
-            text-decoration: none;
-            padding: 11px 19px;
-            font-size: 14px;
-        }
-
-        .button:hover {
-            background: #c1121f;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: auto;
         }
 
         /* FOOTER */
@@ -186,6 +143,10 @@
                 padding: 20px;
             }
 
+            .brand img {
+                height: 50px;
+            }
+
             nav {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -193,14 +154,6 @@
 
             .page-intro h1 {
                 font-size: 40px;
-            }
-
-            .report-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .brand img {
-                height: 50px;
             }
         }
     </style>
@@ -241,38 +194,15 @@
 
     <h2 class="section-title">Monthly Reports</h2>
 
-    <div class="report-grid">
+    <div class="empty-state">
 
+        <h3>No Reports Published Yet</h3>
 
-        <!-- REPORT 1 -->
-
-        <article class="report-card">
-
-            <div class="report-cover">
-                <span>Report Cover</span>
-            </div>
-
-            <div class="report-date">
-                Monthly Report
-            </div>
-
-            <h3>
-                Global Terrorism Report
-            </h3>
-
-            <p>
-                Monthly coverage of terrorist incidents, security operations,
-                and major terrorism-related developments.
-            </p>
-
-            <a href="#" class="button">
-                Read Report
-            </a>
-
-        </article>
-
-
-        <!-- FUTURE REPORTS CAN BE ADDED HERE -->
+        <p>
+            GTT monthly reports will be published here.
+            Check back for upcoming reports covering terrorism incidents,
+            security operations, and major developments around the world.
+        </p>
 
     </div>
 
