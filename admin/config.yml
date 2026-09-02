@@ -2,6 +2,8 @@ backend:
   name: github
   repo: gttracker/globalterrorismtracker.com
   branch: main
+  base_url: https://gtt-github-oauth.gtt-globalterrorismtracker.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "uploads"
 public_folder: "/uploads"
