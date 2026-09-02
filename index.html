@@ -1,0 +1,295 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GTT — Global Terrorism Tracker</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5f0;
+            color: #111;
+        }
+
+        /* HEADER */
+        header {
+            background: #111;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: #c1121f;
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border: 1px solid transparent;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            border-color: #c1121f;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 25px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #c1121f;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 22px;
+        }
+
+        .hero p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* LATEST */
+        .latest {
+            max-width: 1100px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            border-left: 5px solid #c1121f;
+            padding-left: 14px;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 30px;
+        }
+
+        .label {
+            color: #c1121f;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            padding: 11px 19px;
+            font-size: 14px;
+        }
+
+        .button:hover {
+            background: #c1121f;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            color: #bbb;
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+                padding: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html" class="brand">
+        <span>GTT</span> — Global Terrorism Tracker
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="reports.html">Reports</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1><span>GTT</span></h1>
+
+        <h2>Global Terrorism Tracker</h2>
+
+        <p>
+            Documenting and analyzing terrorism and security developments
+            through structured reporting, incident tracking, and analytical coverage.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="latest">
+
+    <h2 class="section-title">Latest</h2>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="label">Latest Report</div>
+
+            <h3>Monthly Terrorism Report</h3>
+
+            <p>
+                Monthly reporting on terrorist incidents, security operations,
+                and major terrorism-related developments.
+            </p>
+
+            <a href="reports.html" class="button">View Reports</a>
+
+        </div>
+
+        <div class="card">
+
+            <div class="label">Latest Analysis</div>
+
+            <h3>Analysis &amp; Insights</h3>
+
+            <p>
+                Analytical coverage examining major incidents, emerging trends,
+                and developments in terrorism and security.
+            </p>
+
+            <a href="analysis.html" class="button">View Analysis</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p><strong>GTT — Global Terrorism Tracker</strong></p>
+
+    <p>Established 11 September 2026</p>
+
+    <p>
+        <a href="mailto:syedafaranifatima123@gmail.com">
+            syedafaranifatima123@gmail.com
+        </a>
+    </p>
+
+</footer>
+
+</body>
+</html>
+```
