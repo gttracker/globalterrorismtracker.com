@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis — GTT Global Terrorism Tracker</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5f0;
+            color: #111;
+        }
+
+        /* HEADER */
+        header {
+            background: #111;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .brand span {
+            color: #c1121f;
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 11px 17px;
+            border: 1px solid transparent;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            border-color: #c1121f;
+        }
+
+        /* PAGE INTRO */
+        .page-intro {
+            padding: 80px 25px 60px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .page-intro h1 {
+            font-size: 52px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .page-intro h1 span {
+            color: #c1121f;
+        }
+
+        .page-intro p {
+            max-width: 750px;
+            margin: auto;
+            color: #666;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ANALYSIS */
+        .analysis {
+            max-width: 1100px;
+            margin: auto;
+            padding: 70px 25px 90px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            border-left: 5px solid #c1121f;
+            padding-left: 14px;
+            margin-bottom: 30px;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .analysis-card {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 30px;
+        }
+
+        .analysis-image {
+            height: 230px;
+            background: #e9e6df;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .analysis-image span {
+            color: #777;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .analysis-date {
+            color: #c1121f;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .analysis-card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .analysis-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            padding: 11px 19px;
+            font-size: 14px;
+        }
+
+        .button:hover {
+            background: #c1121f;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            color: #bbb;
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 18px;
+                padding: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .page-intro h1 {
+                font-size: 40px;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html" class="brand">
+        <span>GTT</span> — Global Terrorism Tracker
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="reports.html">Reports</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+</header>
+
+
+<section class="page-intro">
+
+    <h1><span>GTT</span> Analysis</h1>
+
+    <p>
+        Analytical coverage examining major incidents, emerging trends,
+        and developments in terrorism and security.
+    </p>
+
+</section>
+
+
+<section class="analysis">
+
+    <h2 class="section-title">Analysis &amp; Insights</h2>
+
+    <div class="analysis-grid">
+
+
+        <!-- ANALYSIS 1 -->
+
+        <article class="analysis-card">
+
+            <div class="analysis-image">
+                <span>Article Image</span>
+            </div>
+
+            <div class="analysis-date">
+                Analysis
+            </div>
+
+            <h3>
+                Terrorism &amp; Security Analysis
+            </h3>
+
+            <p>
+                Analytical coverage of major terrorism incidents,
+                emerging trends, and developments in the global security environment.
+            </p>
+
+            <a href="#" class="button">
+                Read Analysis
+            </a>
+
+        </article>
+
+
+        <!-- FUTURE ANALYSES CAN BE ADDED HERE -->
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p><strong>GTT — Global Terrorism Tracker</strong></p>
+
+    <p>Established 11 September 2026</p>
+
+    <p>
+        <a href="mailto:syedafaranifatima123@gmail.com">
+            syedafaranifatima123@gmail.com
+        </a>
+    </p>
+
+</footer>
+
+</body>
+</html>
