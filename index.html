@@ -30,15 +30,15 @@
         }
 
         .brand {
-            color: white;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
         }
 
-        .brand span {
-            color: #c1121f;
+        .brand img {
+            height: 55px;
+            width: auto;
+            display: block;
         }
 
         nav {
@@ -197,6 +197,10 @@
             .cards {
                 grid-template-columns: 1fr;
             }
+
+            .brand img {
+                height: 50px;
+            }
         }
     </style>
 </head>
@@ -206,7 +210,7 @@
 <header>
 
     <a href="index.html" class="brand">
-        <span>GTT</span> — Global Terrorism Tracker
+        <img src="logo.png" alt="GTT — Global Terrorism Tracker">
     </a>
 
     <nav>
