@@ -39,8 +39,6 @@ collections:
         name: "file"
         widget: "file"
         required: true
-        media_folder: "/uploads"
-        public_folder: "/uploads"
         choose_url: false
 
 
@@ -61,11 +59,11 @@ collections:
         name: "year"
         widget: "number"
 
-      - label: "Month"
+      - label: "Month/Date"
         name: "month"
         widget: "string"
 
-      - label: "Description"
+      - label: "Description/Summary"
         name: "description"
         widget: "text"
 
@@ -73,6 +71,4 @@ collections:
         name: "file"
         widget: "file"
         required: true
-        media_folder: "/uploads"
-        public_folder: "/uploads"
         choose_url: false
