@@ -1,241 +1,533 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reports — GTT Global Terrorism Tracker</title>
+```
+<title>Reports — GTT Global Terrorism Tracker</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f5f0;
-            color: #111;
-        }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f5f0;
+        color: #111;
+    }
 
-        /* HEADER */
+    header {
+        background: #111;
+        padding: 22px 7%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .brand img {
+        height: 55px;
+        width: auto;
+        display: block;
+    }
+
+    nav {
+        display: flex;
+        gap: 6px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 11px 17px;
+        border: 1px solid transparent;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        border-color: #c1121f;
+    }
+
+    .page-intro {
+        padding: 80px 25px 60px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .page-intro h1 {
+        font-size: 52px;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .page-intro h1 span {
+        color: #c1121f;
+    }
+
+    .page-intro p {
+        max-width: 750px;
+        margin: auto;
+        color: #666;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .reports {
+        max-width: 1100px;
+        margin: auto;
+        padding: 70px 25px 100px;
+    }
+
+    .section-title {
+        font-size: 30px;
+        border-left: 5px solid #c1121f;
+        padding-left: 14px;
+        margin-bottom: 30px;
+    }
+
+    .report-card {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 30px;
+        margin-bottom: 22px;
+    }
+
+    .report-card h3 {
+        font-size: 23px;
+        margin-bottom: 12px;
+    }
+
+    .report-meta {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+
+    .report-description {
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 22px;
+    }
+
+    .report-button {
+        display: inline-block;
+        background: #c1121f;
+        color: white;
+        text-decoration: none;
+        padding: 11px 18px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .report-button:hover {
+        background: #111;
+    }
+
+    .empty-state {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 70px 30px;
+        text-align: center;
+    }
+
+    .empty-state h3 {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    .empty-state p {
+        color: #666;
+        line-height: 1.7;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .loading {
+        background: white;
+        border: 1px solid #ddd;
+        padding: 50px;
+        text-align: center;
+        color: #666;
+    }
+
+    footer {
+        background: #111;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    footer p {
+        color: #bbb;
+        margin: 7px 0;
+        font-size: 14px;
+    }
+
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+
+    @media (max-width: 700px) {
+
         header {
-            background: #111;
-            padding: 22px 7%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+            flex-direction: column;
+            gap: 18px;
+            padding: 20px;
         }
 
         .brand img {
-            height: 55px;
-            width: auto;
-            display: block;
+            height: 50px;
         }
 
         nav {
-            display: flex;
-            gap: 6px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 11px 17px;
-            border: 1px solid transparent;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            border-color: #c1121f;
-        }
-
-        /* PAGE INTRO */
-        .page-intro {
-            padding: 80px 25px 60px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .page-intro h1 {
-            font-size: 52px;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+            font-size: 40px;
         }
+    }
+</style>
+```
 
-        .page-intro h1 span {
-            color: #c1121f;
-        }
-
-        .page-intro p {
-            max-width: 750px;
-            margin: auto;
-            color: #666;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-
-        /* REPORTS */
-        .reports {
-            max-width: 1100px;
-            margin: auto;
-            padding: 70px 25px 100px;
-        }
-
-        .section-title {
-            font-size: 30px;
-            border-left: 5px solid #c1121f;
-            padding-left: 14px;
-            margin-bottom: 30px;
-        }
-
-        .empty-state {
-            background: white;
-            border: 1px solid #ddd;
-            padding: 70px 30px;
-            text-align: center;
-        }
-
-        .empty-state h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-        }
-
-        .empty-state p {
-            color: #666;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        footer p {
-            color: #bbb;
-            margin: 7px 0;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* MOBILE */
-        @media (max-width: 700px) {
-
-            header {
-                flex-direction: column;
-                gap: 18px;
-                padding: 20px;
-            }
-
-            .brand img {
-                height: 50px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .page-intro h1 {
-                font-size: 40px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
 <header>
 
-    <a href="index.html" class="brand">
-        <img src="logo.jpg" alt="GTT — Global Terrorism Tracker">
-    </a>
+```
+<a href="index.html" class="brand">
+    <img src="logo.jpg" alt="GTT — Global Terrorism Tracker">
+</a>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="reports.html">Reports</a>
-        <a href="analysis.html">Analysis</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="reports.html">Reports</a>
+    <a href="analysis.html">Analysis</a>
+    <a href="contact.html">Contact</a>
+</nav>
+```
 
 </header>
 
-
 <section class="page-intro">
 
-    <h1><span>GTT</span> Reports</h1>
+```
+<h1><span>GTT</span> Reports</h1>
 
-    <p>
-        Monthly reporting on terrorist incidents, security operations,
-        and major terrorism-related developments around the world.
-    </p>
+<p>
+    Monthly reporting on terrorist incidents, security operations,
+    and major terrorism-related developments around the world.
+</p>
+```
 
 </section>
-
 
 <section class="reports">
 
-    <h2 class="section-title">Monthly Reports</h2>
+```
+<h2 class="section-title">Monthly Reports</h2>
 
-    <div class="empty-state">
+<div id="reports-container">
 
-        <h3>No Reports Published Yet</h3>
-
-        <p>
-            GTT monthly reports will be published here.
-            Check back for upcoming reports covering terrorism incidents,
-            security operations, and major developments around the world.
-        </p>
-
+    <div class="loading">
+        Loading reports...
     </div>
+
+</div>
+```
 
 </section>
 
-
 <footer>
 
-    <p><strong>GTT — Global Terrorism Tracker</strong></p>
+```
+<p><strong>GTT — Global Terrorism Tracker</strong></p>
 
-    <p>Established 11 September 2026</p>
+<p>Established 11 September 2026</p>
 
-    <p>
-        <a href="mailto:gtt.globalterrorismtracker@gmail.com">
-            gtt.globalterrorismtracker@gmail.com
-        </a>
-    </p>
+<p>
+    <a href="mailto:gtt.globalterrorismtracker@gmail.com">
+        gtt.globalterrorismtracker@gmail.com
+    </a>
+</p>
 
-    <p>
-        <a href="https://www.linkedin.com/in/syeda-farani-fatima-351982379?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-           target="_blank"
-           rel="noopener noreferrer">
-            LinkedIn
-        </a>
-        &nbsp; | &nbsp;
-        <a href="https://www.instagram.com/globalterrorismtracker?igsi=anN5MWp3bm56dWY0"
-           target="_blank"
-           rel="noopener noreferrer">
-            Instagram
-        </a>
-    </p>
+<p>
+    <a href="https://www.linkedin.com/in/syeda-farani-fatima-351982379"
+       target="_blank"
+       rel="noopener noreferrer">
+        LinkedIn
+    </a>
+    &nbsp; | &nbsp;
+    <a href="https://www.instagram.com/globalterrorismtracker"
+       target="_blank"
+       rel="noopener noreferrer">
+        Instagram
+    </a>
+</p>
+```
 
 </footer>
+
+<script>
+
+const REPO =
+    "gttracker/globalterrorismtracker.com";
+
+const FOLDER =
+    "content/reports";
+
+const container =
+    document.getElementById("reports-container");
+
+
+async function loadReports() {
+
+    try {
+
+        const response = await fetch(
+            `https://api.github.com/repos/${REPO}/contents/${FOLDER}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not load reports.");
+        }
+
+        const files = await response.json();
+
+        const markdownFiles =
+            files.filter(
+                file =>
+                    file.name.endsWith(".md")
+            );
+
+
+        if (markdownFiles.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <h3>No Reports Published Yet</h3>
+                    <p>
+                        GTT monthly reports will be published here.
+                        Check back for upcoming reports covering terrorism
+                        incidents, security operations, and major developments
+                        around the world.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        const reports = [];
+
+
+        for (const file of markdownFiles) {
+
+            const rawResponse =
+                await fetch(file.download_url);
+
+            const markdown =
+                await rawResponse.text();
+
+
+            const titleMatch =
+                markdown.match(
+                    /title:\s*["']?(.*?)["']?\s*$/mi
+                );
+
+            const yearMatch =
+                markdown.match(
+                    /year:\s*["']?(.*?)["']?\s*$/mi
+                );
+
+            const monthMatch =
+                markdown.match(
+                    /month:\s*["']?(.*?)["']?\s*$/mi
+                );
+
+            const descriptionMatch =
+                markdown.match(
+                    /description:\s*["']?(.*?)["']?\s*$/mi
+                );
+
+            const fileMatch =
+                markdown.match(
+                    /\[.*?\]\((.*?)\)/
+                );
+
+
+            const title =
+                titleMatch
+                    ? titleMatch[1].trim()
+                    : file.name.replace(".md", "");
+
+
+            const year =
+                yearMatch
+                    ? yearMatch[1].trim()
+                    : "";
+
+
+            const month =
+                monthMatch
+                    ? monthMatch[1].trim()
+                    : "";
+
+
+            const description =
+                descriptionMatch
+                    ? descriptionMatch[1].trim()
+                    : "";
+
+
+            let documentURL = "";
+
+
+            if (fileMatch) {
+
+                documentURL =
+                    fileMatch[1].trim();
+
+            }
+
+
+            if (
+                documentURL.startsWith(
+                    "https://gtt-admin.gtt-globalterrorismtracker.workers.dev"
+                )
+            ) {
+
+                documentURL =
+                    documentURL.replace(
+                        "https://gtt-admin.gtt-globalterrorismtracker.workers.dev",
+                        "https://globalterrorismtracker.com"
+                    );
+
+            }
+
+
+            reports.push({
+                title,
+                year,
+                month,
+                description,
+                documentURL
+            });
+
+        }
+
+
+        reports.sort(
+            (a, b) =>
+                Number(b.year) - Number(a.year)
+                ||
+                Number(b.month) - Number(a.month)
+        );
+
+
+        container.innerHTML = "";
+
+
+        reports.forEach(report => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "report-card";
+
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(report.title)}
+                </h3>
+
+                <div class="report-meta">
+                    ${escapeHTML(report.month)}
+                    ${report.month && report.year ? ", " : ""}
+                    ${escapeHTML(report.year)}
+                </div>
+
+                <div class="report-description">
+                    ${escapeHTML(report.description)}
+                </div>
+
+                ${
+                    report.documentURL
+                    ?
+                    `
+                    <a
+                        class="report-button"
+                        href="${escapeHTML(report.documentURL)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View Report
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <h3>Unable to Load Reports</h3>
+                <p>
+                    Reports could not be loaded at the moment.
+                    Please try again later.
+                </p>
+            </div>
+        `;
+
+    }
+
+}
+
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+loadReports();
+
+</script>
 
 </body>
 </html>
