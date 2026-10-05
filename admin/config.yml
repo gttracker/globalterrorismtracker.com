@@ -35,11 +35,10 @@ collections:
         name: "description"
         widget: "text"
 
-      - label: "Upload PDF/DOCX"
+      - label: "Publish File (PDF/DOCX)"
         name: "file"
-        widget: "file"
+        widget: "gtt-file"
         required: true
-        choose_url: false
 
 
   - name: "analysis"
@@ -67,8 +66,7 @@ collections:
         name: "description"
         widget: "text"
 
-      - label: "Upload PDF/DOCX"
+      - label: "Publish File (PDF/DOCX)"
         name: "file"
-        widget: "file"
+        widget: "gtt-file"
         required: true
-        choose_url: false
