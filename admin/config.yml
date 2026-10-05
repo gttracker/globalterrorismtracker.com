@@ -20,35 +20,9 @@ collections:
 
     fields:
       - { label: "Title", name: "title", widget: "string" }
-
       - { label: "Year", name: "year", widget: "number" }
-
       - { label: "Month", name: "month", widget: "string" }
-
       - { label: "Description", name: "description", widget: "text" }
-
-      - label: "Report Content"
-        name: "body"
-        widget: "richtext"
-        required: false
-        buttons:
-          - bold
-          - italic
-          - strikethrough
-          - link
-          - heading-one
-          - heading-two
-          - heading-three
-          - heading-four
-          - bulleted-list
-          - numbered-list
-          - quote
-        editor_components:
-          - image
-          - code-block
-        modes:
-          - rich_text
-          - raw
 
       - label: "Report File"
         name: "file"
@@ -65,31 +39,11 @@ collections:
 
     fields:
       - { label: "Title", name: "title", widget: "string" }
-
       - { label: "Date", name: "date", widget: "datetime" }
-
       - { label: "Summary", name: "summary", widget: "text" }
 
       - label: "Content"
         name: "body"
-        widget: "richtext"
+        widget: "markdown"
         required: false
-        buttons:
-          - bold
-          - italic
-          - strikethrough
-          - link
-          - heading-one
-          - heading-two
-          - heading-three
-          - heading-four
-          - bulleted-list
-          - numbered-list
-          - quote
-        editor_components:
-          - image
-          - code-block
-        modes:
-          - rich_text
-          - raw
 ```
