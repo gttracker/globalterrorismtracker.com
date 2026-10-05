@@ -1,3 +1,10 @@
+backend:
+  name: github
+  repo: gttracker/globalterrorismtracker.com
+  branch: main
+  base_url: https://gtt-github-oauth.gtt-globalterrorismtracker.workers.dev
+  auth_endpoint: /auth
+
 media_folder: "uploads"
 public_folder: "/uploads"
 
@@ -11,11 +18,30 @@ collections:
     slug: "{{year}}-{{month}}"
 
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Month", name: "month", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Upload PDF/DOCX", name: "file", widget: "file", required: true }
+
+      - label: "Title"
+        name: "title"
+        widget: "string"
+
+      - label: "Year"
+        name: "year"
+        widget: "number"
+
+      - label: "Month"
+        name: "month"
+        widget: "string"
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Upload PDF/DOCX"
+        name: "file"
+        widget: "file"
+        required: true
+        media_folder: "/uploads"
+        public_folder: "/uploads"
+        choose_url: false
 
 
   - name: "analysis"
@@ -26,8 +52,27 @@ collections:
     slug: "{{year}}-{{month}}"
 
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Month", name: "month", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Upload PDF/DOCX", name: "file", widget: "file", required: true }
+
+      - label: "Title"
+        name: "title"
+        widget: "string"
+
+      - label: "Year"
+        name: "year"
+        widget: "number"
+
+      - label: "Month"
+        name: "month"
+        widget: "string"
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Upload PDF/DOCX"
+        name: "file"
+        widget: "file"
+        required: true
+        media_folder: "/uploads"
+        public_folder: "/uploads"
+        choose_url: false
