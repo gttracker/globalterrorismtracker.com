@@ -12,10 +12,11 @@ collections:
 
   - name: "reports"
     label: "Reports"
-    folder: "content/reports"
+    folder: "reports"
     create: true
     delete: true
     slug: "{{year}}-{{month}}"
+    format: "yaml-frontmatter"
 
     fields:
 
@@ -43,10 +44,11 @@ collections:
 
   - name: "analysis"
     label: "Analysis"
-    folder: "content/analysis"
+    folder: "analysis"
     create: true
     delete: true
     slug: "{{year}}-{{month}}"
+    format: "yaml-frontmatter"
 
     fields:
 
