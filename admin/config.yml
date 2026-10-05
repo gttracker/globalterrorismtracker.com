@@ -1,3 +1,4 @@
+```yaml
 backend:
   name: github
   repo: gttracker/globalterrorismtracker.com
@@ -28,8 +29,26 @@ collections:
 
       - label: "Report Content"
         name: "body"
-        widget: "markdown"
+        widget: "richtext"
         required: false
+        buttons:
+          - bold
+          - italic
+          - strikethrough
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - heading-four
+          - bulleted-list
+          - numbered-list
+          - quote
+        editor_components:
+          - image
+          - code-block
+        modes:
+          - rich_text
+          - raw
 
       - label: "Report File"
         name: "file"
@@ -53,5 +72,24 @@ collections:
 
       - label: "Content"
         name: "body"
-        widget: "markdown"
+        widget: "richtext"
         required: false
+        buttons:
+          - bold
+          - italic
+          - strikethrough
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - heading-four
+          - bulleted-list
+          - numbered-list
+          - quote
+        editor_components:
+          - image
+          - code-block
+        modes:
+          - rich_text
+          - raw
+```
