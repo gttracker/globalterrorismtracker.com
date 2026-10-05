@@ -1,4 +1,3 @@
-```yaml
 backend:
   name: github
   repo: gttracker/globalterrorismtracker.com
@@ -19,15 +18,29 @@ collections:
     slug: "{{year}}-{{month}}"
 
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Year", name: "year", widget: "number" }
-      - { label: "Month", name: "month", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
+      - label: "Title"
+        name: "title"
+        widget: "string"
 
-      - label: "Report File"
+      - label: "Year"
+        name: "year"
+        widget: "number"
+
+      - label: "Month"
+        name: "month"
+        widget: "string"
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Upload PDF/DOCX"
         name: "file"
         widget: "file"
-        required: false
+        required: true
+        media_library:
+          config:
+            multiple: false
 
 
   - name: "analysis"
@@ -38,12 +51,26 @@ collections:
     slug: "{{slug}}"
 
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Summary", name: "summary", widget: "text" }
+      - label: "Title"
+        name: "title"
+        widget: "string"
 
-      - label: "Content"
-        name: "body"
-        widget: "markdown"
-        required: false
-```
+      - label: "Year"
+        name: "year"
+        widget: "number"
+
+      - label: "Month"
+        name: "month"
+        widget: "string"
+
+      - label: "Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Upload PDF/DOCX"
+        name: "file"
+        widget: "file"
+        required: true
+        media_library:
+          config:
+            multiple: false
