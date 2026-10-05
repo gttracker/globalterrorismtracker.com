@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,11 +58,17 @@
       min-height: 700px;
     }
   </style>
+
+  <!-- Prevent Decap from auto-initializing before config is ready -->
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
+
 </head>
 
 <body>
 
-  <!-- GTT SITE CONTROL -->
+  <!-- GTT WEBSITE CONTROL -->
 
   <div class="gtt-control">
 
@@ -71,11 +78,15 @@
       Checking website status...
     </div>
 
-    <button class="lock-btn" onclick="lockSite()">
+    <button
+      class="lock-btn"
+      onclick="lockSite()">
       🔒 Lock Site
     </button>
 
-    <button class="unlock-btn" onclick="unlockSite()">
+    <button
+      class="unlock-btn"
+      onclick="unlockSite()">
       🔓 Unlock Site
     </button>
 
@@ -88,6 +99,8 @@
 
   <div id="nc-root"></div>
 
+
+  <!-- WEBSITE CONTROL SCRIPT -->
 
   <script>
 
@@ -144,6 +157,11 @@
 
           checkStatus();
 
+        } else {
+
+          document.getElementById("site-message").innerHTML =
+            "Unable to lock website.";
+
         }
 
       } catch (error) {
@@ -173,6 +191,11 @@
 
           checkStatus();
 
+        } else {
+
+          document.getElementById("site-message").innerHTML =
+            "Unable to unlock website.";
+
         }
 
       } catch (error) {
@@ -190,9 +213,26 @@
   </script>
 
 
-  <!-- DECAP CMS -->
+  <!-- DECAP CMS LIBRARY -->
 
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script
+    src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js">
+  </script>
+
+
+  <!-- START DECAP MANUALLY -->
+
+  <script>
+
+    CMS.init({
+      config: {
+        load_config_file: true
+      }
+    });
+
+  </script>
+
 
 </body>
+
 </html>
