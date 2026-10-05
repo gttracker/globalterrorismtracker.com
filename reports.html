@@ -295,16 +295,22 @@ async function loadReports() {
 
     try {
 
+        const GITHUB_API =
+            "https://api.github.com/repos/gttracker/globalterrorismtracker.com/contents/content/reports";
+
         const response = await fetch(GITHUB_API);
 
         if (!response.ok) {
-            throw new Error("Unable to load reports");
+            throw new Error(
+                `GitHub API returned ${response.status}`
+            );
         }
 
         const files = await response.json();
 
         const markdownFiles = files.filter(file =>
-            file.name.endsWith(".md")
+            file.type === "file" &&
+            file.name.toLowerCase().endsWith(".md")
         );
 
         if (markdownFiles.length === 0) {
@@ -322,6 +328,143 @@ async function loadReports() {
 
             return;
         }
+
+        const reports = [];
+
+        for (const file of markdownFiles) {
+
+            const fileResponse =
+                await fetch(file.download_url);
+
+            if (!fileResponse.ok) {
+                throw new Error(
+                    `Unable to load report file: ${file.name}`
+                );
+            }
+
+            const markdown =
+                await fileResponse.text();
+
+            const title =
+                getField(markdown, "title") ||
+                file.name.replace(".md", "");
+
+            const year =
+                getField(markdown, "year");
+
+            const month =
+                getField(markdown, "month");
+
+            const description =
+                getField(markdown, "description");
+
+            const uploadedFile =
+                getField(markdown, "file");
+
+            reports.push({
+                title,
+                year,
+                month,
+                description,
+                uploadedFile
+            });
+        }
+
+        reports.sort((a, b) => {
+
+            const dateA =
+                new Date(
+                    `${a.year || 0}-${a.month || 1}-01`
+                );
+
+            const dateB =
+                new Date(
+                    `${b.year || 0}-${b.month || 1}-01`
+                );
+
+            return dateB - dateA;
+        });
+
+        reportsContainer.innerHTML = "";
+
+        reports.forEach(report => {
+
+            let fileUrl =
+                report.uploadedFile || "#";
+
+            if (fileUrl.startsWith("/uploads/")) {
+
+                fileUrl =
+                    window.location.origin + fileUrl;
+            }
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "report-card";
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(report.title)}
+                </h3>
+
+                <div class="report-date">
+                    ${escapeHTML(report.month || "")}
+                    ${escapeHTML(report.year || "")}
+                </div>
+
+                <div class="report-description">
+                    ${escapeHTML(report.description || "")}
+                </div>
+
+                ${
+                    fileUrl !== "#"
+                    ?
+                    `
+                    <a
+                        class="report-button"
+                        href="${escapeHTML(fileUrl)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View / Download Report
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+            reportsContainer.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "GTT Reports Error:",
+            error
+        );
+
+        reportsContainer.innerHTML = `
+
+            <div class="error-state">
+
+                <h3>Unable to Load Reports</h3>
+
+                <p>
+                    Reports could not be loaded at this time.
+                    Please try again later.
+                </p>
+
+            </div>
+
+        `;
+    }
+}
 
         const reports = [];
 
