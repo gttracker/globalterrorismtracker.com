@@ -19,7 +19,6 @@
             color: #111;
         }
 
-        /* HEADER */
         header {
             background: #111;
             padding: 22px 7%;
@@ -57,7 +56,6 @@
             border-color: #c1121f;
         }
 
-        /* PAGE INTRO */
         .page-intro {
             padding: 80px 25px 60px;
             text-align: center;
@@ -82,7 +80,6 @@
             line-height: 1.7;
         }
 
-        /* REPORTS */
         .reports {
             max-width: 1100px;
             margin: auto;
@@ -96,11 +93,60 @@
             margin-bottom: 30px;
         }
 
-        .empty-state {
+        #reports-container {
+            display: grid;
+            gap: 25px;
+        }
+
+        .report-card {
             background: white;
             border: 1px solid #ddd;
-            padding: 70px 30px;
+            padding: 30px;
+        }
+
+        .report-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .report-date {
+            color: #c1121f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .report-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .report-button {
+            display: inline-block;
+            background: #111;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .report-button:hover {
+            background: #c1121f;
+        }
+
+        .loading,
+        .empty-state,
+        .error-state {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 60px 30px;
             text-align: center;
+        }
+
+        .loading,
+        .error-state {
+            color: #666;
         }
 
         .empty-state h3 {
@@ -108,14 +154,14 @@
             margin-bottom: 12px;
         }
 
-        .empty-state p {
+        .empty-state p,
+        .error-state p {
             color: #666;
             line-height: 1.7;
             max-width: 600px;
             margin: auto;
         }
 
-        /* FOOTER */
         footer {
             background: #111;
             color: white;
@@ -134,7 +180,6 @@
             text-decoration: none;
         }
 
-        /* MOBILE */
         @media (max-width: 700px) {
 
             header {
@@ -154,6 +199,10 @@
 
             .page-intro h1 {
                 font-size: 40px;
+            }
+
+            .report-card {
+                padding: 22px;
             }
         }
     </style>
@@ -194,16 +243,10 @@
 
     <h2 class="section-title">Monthly Reports</h2>
 
-    <div class="empty-state">
-
-        <h3>No Reports Published Yet</h3>
-
-        <p>
-            GTT monthly reports will be published here.
-            Check back for upcoming reports covering terrorism incidents,
-            security operations, and major developments around the world.
-        </p>
-
+    <div id="reports-container">
+        <div class="loading">
+            Loading reports...
+        </div>
     </div>
 
 </section>
@@ -236,6 +279,337 @@
     </p>
 
 </footer>
+
+
+<script>
+
+const GITHUB_API =
+   const GITHUB_API =
+    "https://api.github.com/repos/gttracker/globalterrorismtracker.com/contents/content/reports";
+
+const reportsContainer =
+    document.getElementById("reports-container");
+
+
+async function loadReports() {
+
+    try {
+
+        const GITHUB_API =
+            "https://api.github.com/repos/gttracker/globalterrorismtracker.com/contents/content/reports";
+
+        const response = await fetch(GITHUB_API);
+
+        if (!response.ok) {
+            throw new Error(
+                `GitHub API returned ${response.status}`
+            );
+        }
+
+        const files = await response.json();
+
+        const markdownFiles = files.filter(file =>
+            file.type === "file" &&
+            file.name.toLowerCase().endsWith(".md")
+        );
+
+        if (markdownFiles.length === 0) {
+
+            reportsContainer.innerHTML = `
+                <div class="empty-state">
+                    <h3>No Reports Published Yet</h3>
+                    <p>
+                        GTT monthly reports will be published here.
+                        Check back for upcoming reports covering terrorism
+                        incidents, security operations, and major developments.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+        const reports = [];
+
+        for (const file of markdownFiles) {
+
+            const fileResponse =
+                await fetch(file.download_url);
+
+            if (!fileResponse.ok) {
+                throw new Error(
+                    `Unable to load report file: ${file.name}`
+                );
+            }
+
+            const markdown =
+                await fileResponse.text();
+
+            const title =
+                getField(markdown, "title") ||
+                file.name.replace(".md", "");
+
+            const year =
+                getField(markdown, "year");
+
+            const month =
+                getField(markdown, "month");
+
+            const description =
+                getField(markdown, "description");
+
+            const uploadedFile =
+                getField(markdown, "file");
+
+            reports.push({
+                title,
+                year,
+                month,
+                description,
+                uploadedFile
+            });
+        }
+
+        reports.sort((a, b) => {
+
+            const dateA =
+                new Date(
+                    `${a.year || 0}-${a.month || 1}-01`
+                );
+
+            const dateB =
+                new Date(
+                    `${b.year || 0}-${b.month || 1}-01`
+                );
+
+            return dateB - dateA;
+        });
+
+        reportsContainer.innerHTML = "";
+
+        reports.forEach(report => {
+
+            let fileUrl =
+                report.uploadedFile || "#";
+
+            if (fileUrl.startsWith("/uploads/")) {
+
+                fileUrl =
+                    window.location.origin + fileUrl;
+            }
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "report-card";
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(report.title)}
+                </h3>
+
+                <div class="report-date">
+                    ${escapeHTML(report.month || "")}
+                    ${escapeHTML(report.year || "")}
+                </div>
+
+                <div class="report-description">
+                    ${escapeHTML(report.description || "")}
+                </div>
+
+                ${
+                    fileUrl !== "#"
+                    ?
+                    `
+                    <a
+                        class="report-button"
+                        href="${escapeHTML(fileUrl)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View / Download Report
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+            reportsContainer.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            "GTT Reports Error:",
+            error
+        );
+
+        reportsContainer.innerHTML = `
+
+            <div class="error-state">
+
+                <h3>Unable to Load Reports</h3>
+
+                <p>
+                    Reports could not be loaded at this time.
+                    Please try again later.
+                </p>
+
+            </div>
+
+        `;
+    }
+}
+
+        const reports = [];
+
+        for (const file of markdownFiles) {
+
+            const fileResponse = await fetch(file.download_url);
+
+            const markdown = await fileResponse.text();
+
+            const title =
+                getField(markdown, "title") ||
+                file.name.replace(".md", "");
+
+            const year =
+                getField(markdown, "year");
+
+            const month =
+                getField(markdown, "month");
+
+            const description =
+                getField(markdown, "description");
+
+            const uploadedFile =
+                getField(markdown, "file");
+
+            reports.push({
+                title,
+                year,
+                month,
+                description,
+                uploadedFile
+            });
+        }
+
+
+        reports.sort((a, b) => {
+
+            const dateA =
+                new Date(`${a.year || 0}-${a.month || 1}-01`);
+
+            const dateB =
+                new Date(`${b.year || 0}-${b.month || 1}-01`);
+
+            return dateB - dateA;
+        });
+
+
+        reportsContainer.innerHTML = "";
+
+
+        reports.forEach(report => {
+
+            let fileUrl = report.uploadedFile || "#";
+
+            if (fileUrl.startsWith("/uploads/")) {
+                fileUrl =
+                    window.location.origin + fileUrl;
+            }
+
+            const card = document.createElement("div");
+
+            card.className = "report-card";
+
+            card.innerHTML = `
+
+                <h3>${escapeHTML(report.title)}</h3>
+
+                <div class="report-date">
+                    ${escapeHTML(report.month || "")}
+                    ${escapeHTML(report.year || "")}
+                </div>
+
+                <div class="report-description">
+                    ${escapeHTML(report.description || "")}
+                </div>
+
+                ${
+                    fileUrl !== "#"
+                    ?
+                    `<a class="report-button"
+                       href="${escapeHTML(fileUrl)}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        View / Download Report
+                    </a>`
+                    :
+                    ""
+                }
+
+            `;
+
+            reportsContainer.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        reportsContainer.innerHTML = `
+
+            <div class="error-state">
+
+                <h3>Unable to Load Reports</h3>
+
+                <p>
+                    Reports could not be loaded at this time.
+                    Please try again later.
+                </p>
+
+            </div>
+
+        `;
+    }
+}
+
+
+function getField(markdown, field) {
+
+    const regex =
+        new RegExp(
+            "^" + field + "\\s*:\\s*[\"']?([^\"'\\n]+)[\"']?\\s*$",
+            "mi"
+        );
+
+    const match = markdown.match(regex);
+
+    return match ? match[1].trim() : "";
+}
+
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+loadReports();
+
+</script>
 
 </body>
 </html>
