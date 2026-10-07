@@ -38,11 +38,8 @@ collections:
 
       - label: "Publish File (PDF/DOCX)"
         name: "file"
-        widget: "file"
+        widget: "gtt-file"
         required: true
-        media_library:
-          config:
-            multiple: false
 
 
   - name: "analysis"
@@ -73,8 +70,5 @@ collections:
 
       - label: "Publish File (PDF/DOCX)"
         name: "file"
-        widget: "file"
+        widget: "gtt-file"
         required: true
-        media_library:
-          config:
-            multiple: false
