@@ -567,16 +567,30 @@ async function loadReport(filename) {
 
 
         wrapper.querySelectorAll("img").forEach(img => {
+    const src = img.getAttribute("src");
+    if (!src) return;
 
-            const src = img.getAttribute("src");
+    if (
+        src.startsWith("http://") ||
+        src.startsWith("https://") ||
+        src.startsWith("data:")
+    ) {
+        return;
+    }
 
-            if (src && !src.startsWith("http") && !src.startsWith("data:")) {
+    let imagePath = src.replace(/^\/+/, "");
 
-                img.src = new URL(src, rawFolderURL).href;
+    // GTT uploaded images are stored in /uploads/
+    if (imagePath.startsWith("uploads/")) {
+        imagePath = imagePath;
+    } else {
+        imagePath = "uploads/" + imagePath.split("/").pop();
+    }
 
-            }
-
-        });
+    img.src =
+        "https://raw.githubusercontent.com/gttracker/globalterrorismtracker.com/main/" +
+        imagePath;
+});
 
 
         wrapper.querySelectorAll("a").forEach(link => {
