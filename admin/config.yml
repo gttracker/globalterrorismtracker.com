@@ -40,6 +40,9 @@ collections:
         name: "file"
         widget: "file"
         required: true
+        media_library:
+          config:
+            multiple: false
 
 
   - name: "analysis"
@@ -68,7 +71,10 @@ collections:
         name: "description"
         widget: "text"
 
-            - label: "Publish File (PDF/DOCX)"
+      - label: "Publish File (PDF/DOCX)"
         name: "file"
         widget: "file"
         required: true
+        media_library:
+          config:
+            multiple: false
