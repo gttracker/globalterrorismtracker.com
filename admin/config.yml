@@ -68,7 +68,7 @@ collections:
         name: "description"
         widget: "text"
 
-      - label: "Publish File (PDF/DOCX)"
-        name: "file"
-        widget: "gtt-file"
-        required: true
+- label: "Publish File (PDF/DOCX)"
+  name: "file"
+  widget: "gtt-file"
+  required: true
