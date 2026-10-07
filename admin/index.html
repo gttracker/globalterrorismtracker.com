@@ -5,9 +5,13 @@
 
   <meta charset="utf-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
 
-  <meta name="robots" content="noindex">
+  <meta
+    name="robots"
+    content="noindex">
 
   <title>GTT Admin</title>
 
@@ -70,7 +74,9 @@
 
 </head>
 
+
 <body>
+
 
   <div class="gtt-control">
 
@@ -96,12 +102,15 @@
 
   </div>
 
+
   <div id="nc-root"></div>
+
 
   <script>
 
     const CONTROL_URL =
       "https://gtt-site-control.gtt-globalterrorismtracker.workers.dev";
+
 
     async function checkStatus() {
 
@@ -113,17 +122,10 @@
         const data =
           await response.json();
 
-        if (data.status === "unlocked") {
-
-          document.getElementById("site-status").innerHTML =
-            "🟢 Website Status: UNLOCKED";
-
-        } else {
-
-          document.getElementById("site-status").innerHTML =
-            "🔴 Website Status: LOCKED";
-
-        }
+        document.getElementById("site-status").innerHTML =
+          data.status === "unlocked"
+            ? "🟢 Website Status: UNLOCKED"
+            : "🔴 Website Status: LOCKED";
 
       } catch (error) {
 
@@ -145,19 +147,12 @@
         const data =
           await response.json();
 
-        if (data.success) {
+        document.getElementById("site-message").innerHTML =
+          data.success
+            ? "Website locked successfully."
+            : "Unable to lock website.";
 
-          document.getElementById("site-message").innerHTML =
-            "Website locked successfully.";
-
-          checkStatus();
-
-        } else {
-
-          document.getElementById("site-message").innerHTML =
-            "Unable to lock website.";
-
-        }
+        checkStatus();
 
       } catch (error) {
 
@@ -179,19 +174,12 @@
         const data =
           await response.json();
 
-        if (data.success) {
+        document.getElementById("site-message").innerHTML =
+          data.success
+            ? "Website unlocked successfully."
+            : "Unable to unlock website.";
 
-          document.getElementById("site-message").innerHTML =
-            "Website unlocked successfully.";
-
-          checkStatus();
-
-        } else {
-
-          document.getElementById("site-message").innerHTML =
-            "Unable to unlock website.";
-
-        }
+        checkStatus();
 
       } catch (error) {
 
@@ -208,9 +196,18 @@
   </script>
 
 
-  <script
-    src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js">
+  <!-- React helper used by Decap custom widgets -->
+  <script>
+    window.h = React.createElement;
   </script>
+
+
+  <!-- Custom GTT PDF/DOCX widget -->
+  <script src="/admin/upload.js"></script>
+
+
+  <!-- Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
 
   <script>
@@ -222,6 +219,7 @@
     });
 
   </script>
+
 
 </body>
 
