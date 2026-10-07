@@ -68,8 +68,7 @@ collections:
         name: "description"
         widget: "text"
 
-      - label: "Publish File (PDF/DOCX)"
-  name: "file"
-  widget: "file"
-  required: true
-  allow_multiple: false
+            - label: "Publish File (PDF/DOCX)"
+        name: "file"
+        widget: "file"
+        required: true
