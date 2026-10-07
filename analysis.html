@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reports — GTT Global Terrorism Tracker</title>
+    <title>Analysis — GTT Global Terrorism Tracker</title>
+
+    <!-- Markdown renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- HTML sanitizer -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 
     <style>
         * {
@@ -20,6 +26,7 @@
         }
 
         /* HEADER */
+
         header {
             background: #111;
             padding: 22px 7%;
@@ -58,6 +65,7 @@
         }
 
         /* PAGE INTRO */
+
         .page-intro {
             padding: 80px 25px 60px;
             text-align: center;
@@ -82,8 +90,9 @@
             line-height: 1.7;
         }
 
-        /* REPORTS */
-        .reports {
+        /* ANALYSIS LIST */
+
+        .analysis-section {
             max-width: 1100px;
             margin: auto;
             padding: 70px 25px 100px;
@@ -96,26 +105,153 @@
             margin-bottom: 30px;
         }
 
-        .empty-state {
+        .analysis-card {
             background: white;
             border: 1px solid #ddd;
-            padding: 70px 30px;
-            text-align: center;
+            padding: 35px;
+            margin-bottom: 25px;
         }
 
-        .empty-state h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
+        .analysis-card h3 {
+            font-size: 25px;
+            line-height: 1.4;
+            margin-bottom: 15px;
         }
 
-        .empty-state p {
+        .analysis-card p {
             color: #666;
             line-height: 1.7;
-            max-width: 600px;
+        }
+
+        .read-button {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 12px 22px;
+            background: #c1121f;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .read-button:hover {
+            opacity: 0.85;
+        }
+
+        /* FULL REPORT */
+
+        .report-container {
+            display: none;
+            max-width: 950px;
             margin: auto;
+            padding: 70px 25px 100px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #c1121f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .report-content {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 55px;
+        }
+
+        .report-content h1 {
+            font-size: 38px;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .report-content h2 {
+            font-size: 29px;
+            margin-top: 40px;
+            margin-bottom: 18px;
+            border-left: 4px solid #c1121f;
+            padding-left: 12px;
+        }
+
+        .report-content h3 {
+            font-size: 23px;
+            margin-top: 30px;
+            margin-bottom: 14px;
+        }
+
+        .report-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .report-content ul,
+        .report-content ol {
+            margin: 0 0 22px 30px;
+            line-height: 1.8;
+        }
+
+        .report-content li {
+            margin-bottom: 8px;
+        }
+
+        .report-content blockquote {
+            border-left: 4px solid #c1121f;
+            padding: 15px 20px;
+            margin: 25px 0;
+            background: #f7f5f0;
+            color: #444;
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+
+        .report-content th,
+        .report-content td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .report-content th {
+            background: #f1f1f1;
+        }
+
+        .report-content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 25px auto;
+        }
+
+        .report-content a {
+            color: #c1121f;
+        }
+
+        .report-content hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 35px 0;
+        }
+
+        /* LOADING / ERROR */
+
+        .message-box {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 60px 30px;
+            text-align: center;
+            color: #666;
+            line-height: 1.7;
         }
 
         /* FOOTER */
+
         footer {
             background: #111;
             color: white;
@@ -135,6 +271,7 @@
         }
 
         /* MOBILE */
+
         @media (max-width: 700px) {
 
             header {
@@ -154,6 +291,22 @@
 
             .page-intro h1 {
                 font-size: 40px;
+            }
+
+            .report-content {
+                padding: 25px;
+            }
+
+            .report-content h1 {
+                font-size: 30px;
+            }
+
+            .report-content h2 {
+                font-size: 24px;
+            }
+
+            .report-content p {
+                font-size: 16px;
             }
         }
     </style>
@@ -180,31 +333,46 @@
 
 <section class="page-intro">
 
-    <h1><span>GTT</span> Reports</h1>
+    <h1><span>GTT</span> Analysis</h1>
 
     <p>
-        Monthly reporting on terrorist incidents, security operations,
-        and major terrorism-related developments around the world.
+        In-depth analysis of terrorism, counterterrorism,
+        security developments, and major conflicts around the world.
     </p>
 
 </section>
 
 
-<section class="reports">
+<!-- ANALYSIS LIST -->
 
-    <h2 class="section-title">Monthly Reports</h2>
+<section class="analysis-section" id="analysis-section">
 
-    <div class="empty-state">
+    <h2 class="section-title">Published Analysis</h2>
 
-        <h3>No Reports Published Yet</h3>
+    <div id="analysis-list">
 
-        <p>
-            GTT monthly reports will be published here.
-            Check back for upcoming reports covering terrorism incidents,
-            security operations, and major developments around the world.
-        </p>
+        <div class="message-box">
+            Loading analysis...
+        </div>
 
     </div>
+
+</section>
+
+
+<!-- FULL REPORT -->
+
+<section class="report-container" id="report-container">
+
+    <a href="analysis.html" class="back-button">
+        ← Back to Analysis
+    </a>
+
+    <article class="report-content" id="report-content">
+
+        Loading report...
+
+    </article>
 
 </section>
 
@@ -236,6 +404,294 @@
     </p>
 
 </footer>
+
+
+<script>
+
+const GITHUB_API =
+    "https://api.github.com/repos/gttracker/globalterrorismtracker.com/contents/content/analysis";
+
+
+const analysisList = document.getElementById("analysis-list");
+const analysisSection = document.getElementById("analysis-section");
+const reportContainer = document.getElementById("report-container");
+const reportContent = document.getElementById("report-content");
+
+
+/* -------------------------------------------------------
+   GET FILE LIST
+------------------------------------------------------- */
+
+async function loadAnalysisList() {
+
+    try {
+
+        const response = await fetch(GITHUB_API);
+
+        if (!response.ok) {
+            throw new Error("GitHub API error: " + response.status);
+        }
+
+        const files = await response.json();
+
+        const markdownFiles = files.filter(file =>
+            file.type === "file" &&
+            file.name.toLowerCase().endsWith(".md")
+        );
+
+        if (markdownFiles.length === 0) {
+
+            analysisList.innerHTML = `
+                <div class="message-box">
+                    No analysis has been published yet.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        analysisList.innerHTML = "";
+
+
+        markdownFiles.reverse().forEach(file => {
+
+            const title = file.name
+                .replace(/\.md$/i, "")
+                .replace(/_/g, " ")
+                .replace(/-/g, " ")
+                .replace(/\b\w/g, letter => letter.toUpperCase());
+
+
+            const card = document.createElement("div");
+
+            card.className = "analysis-card";
+
+
+            card.innerHTML = `
+                <h3>${escapeHTML(title)}</h3>
+
+                <p>
+                    Monthly Terrorism and Counterterrorism Report
+                    published by the Global Terrorism Tracker.
+                </p>
+
+                <a href="?analysis=${encodeURIComponent(file.name)}"
+                   class="read-button">
+                    Read Full Analysis
+                </a>
+            `;
+
+
+            analysisList.appendChild(card);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        analysisList.innerHTML = `
+            <div class="message-box">
+                <h3>Unable to Load Analysis</h3>
+                <p>
+                    Analysis could not be loaded at this time.
+                    Please try again later.
+                </p>
+            </div>
+        `;
+    }
+}
+
+
+/* -------------------------------------------------------
+   OPEN SELECTED REPORT
+------------------------------------------------------- */
+
+async function loadReport(filename) {
+
+    try {
+
+        const apiURL =
+            GITHUB_API + "/" + encodeURIComponent(filename);
+
+
+        const response = await fetch(apiURL);
+
+
+        if (!response.ok) {
+            throw new Error("Unable to find report");
+        }
+
+
+        const fileData = await response.json();
+
+
+        /*
+         * GitHub returns Markdown content as Base64.
+         */
+
+        const markdown = decodeBase64(fileData.content);
+
+
+        /*
+         * Convert Markdown → HTML.
+         */
+
+        let html = marked.parse(markdown);
+
+
+        /*
+         * Sanitize generated HTML.
+         */
+
+        html = DOMPurify.sanitize(html);
+
+
+        /*
+         * Fix images and links that use relative paths.
+         *
+         * This is important because the Markdown file may
+         * contain uploaded images.
+         */
+
+        const wrapper = document.createElement("div");
+
+        wrapper.innerHTML = html;
+
+
+        const rawFolderURL =
+            "https://raw.githubusercontent.com/gttracker/globalterrorismtracker.com/main/content/analysis/";
+
+
+        wrapper.querySelectorAll("img").forEach(img => {
+
+            const src = img.getAttribute("src");
+
+            if (src && !src.startsWith("http") && !src.startsWith("data:")) {
+
+                img.src = new URL(src, rawFolderURL).href;
+
+            }
+
+        });
+
+
+        wrapper.querySelectorAll("a").forEach(link => {
+
+            const href = link.getAttribute("href");
+
+            if (
+                href &&
+                !href.startsWith("http") &&
+                !href.startsWith("#") &&
+                !href.startsWith("mailto:")
+            ) {
+
+                link.href = new URL(href, rawFolderURL).href;
+
+            }
+
+        });
+
+
+        reportContent.innerHTML = wrapper.innerHTML;
+
+
+        /*
+         * Hide list and show report.
+         */
+
+        analysisSection.style.display = "none";
+
+        reportContainer.style.display = "block";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        reportContent.innerHTML = `
+            <div class="message-box">
+                <h3>Unable to Load Report</h3>
+                <p>
+                    The report could not be loaded at this time.
+                    Please try again later.
+                </p>
+            </div>
+        `;
+
+        analysisSection.style.display = "none";
+
+        reportContainer.style.display = "block";
+    }
+}
+
+
+/* -------------------------------------------------------
+   BASE64 DECODER
+------------------------------------------------------- */
+
+function decodeBase64(base64) {
+
+    const cleaned = base64.replace(/\s/g, "");
+
+    const binary = atob(cleaned);
+
+    const bytes = new Uint8Array(binary.length);
+
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+
+    return new TextDecoder("utf-8").decode(bytes);
+}
+
+
+/* -------------------------------------------------------
+   ESCAPE HTML
+------------------------------------------------------- */
+
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* -------------------------------------------------------
+   CHECK IF A REPORT WAS REQUESTED
+------------------------------------------------------- */
+
+const params = new URLSearchParams(window.location.search);
+
+const selectedAnalysis = params.get("analysis");
+
+
+if (selectedAnalysis) {
+
+    loadReport(selectedAnalysis);
+
+} else {
+
+    loadAnalysisList();
+
+}
+
+</script>
 
 </body>
 </html>
